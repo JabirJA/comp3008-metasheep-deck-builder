@@ -1,0 +1,11 @@
+{
+  "name": "comp3008-metasheep-deck-builder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "COMP 3008 A4: functional vertical slice of the redesigned MetaSheep deck builder",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node tests/rules.test.js"
+  }
+}

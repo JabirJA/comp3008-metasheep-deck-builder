@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MetaSheep Deck Builder (A4)</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#search">Skip to card library</a>
+    <header id="topbar"></header>
+    <div id="banner"></div>
+    <main class="layout">
+      <section class="panel library" aria-labelledby="lib-h">
+        <h1 id="lib-h" class="sr-only">Card library</h1>
+        <label class="sr-only" for="search">Search cards by name</label>
+        <input id="search" type="search" placeholder="Search by name…" autocomplete="off" />
+        <div id="filters"></div>
+        <div id="meta" class="metabar"></div>
+        <div id="grid" class="grid"></div>
+      </section>
+      <aside class="deck-col" aria-label="Your deck">
+        <section id="main-panel" class="panel" aria-label="Main Deck"></section>
+        <section id="side-panel" class="panel" aria-label="Sideboard"></section>
+      </aside>
+    </main>
+    <div id="modal-root"></div>
+    <div id="toast-root" aria-live="polite"></div>
+    <noscript>This prototype needs JavaScript.</noscript>
+  </body>
+</html>
