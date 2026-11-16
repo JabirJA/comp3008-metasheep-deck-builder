@@ -7,6 +7,8 @@ A working version of our redesigned MetaSheep deck builder: build a deck with a 
 Needs a modern browser (Chrome, Edge, Firefox, Safari) and Python 3 (preinstalled on macOS) or Node. No other dependencies and no build step.
 
 ```
+npm start
+or 
 python3 -m http.server 8000
 ```
 
