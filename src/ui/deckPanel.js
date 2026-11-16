@@ -50,7 +50,7 @@ export function mainPanelHtml(s) {
   return `<header class="phead">
       <h2>Main Deck <span class="counter">${total(s.main)}/${MAIN_SIZE}</span></h2>
       <div class="save">
-        <button type="button" class="btn primary" data-action="save" data-fid="save" ${legal ? '' : 'disabled'}>${s.user ? '' : '🔒 '}Save Deck</button>
+        <button type="button" class="btn primary" data-action="save" data-fid="save" ${legal ? '' : 'disabled'}>Save Deck</button>
         <span class="helper">${helper}</span>
       </div>
     </header>
