@@ -7,11 +7,13 @@ export function topbarHtml(s) {
     ? `<span class="who">${esc(s.user.email)}</span>
        <button type="button" class="btn ghost" data-action="sign-out" data-fid="sign-out">Sign out</button>`
     : '<button type="button" class="btn primary" data-action="signin-open" data-fid="top-signin">Sign in</button>';
-  return `<span class="brand">MetaSheep</span><span class="tab">Deck Builder</span><div class="account">${account}</div>`;
+  const tab = (view, label) =>
+    `<button type="button" class="tab" data-action="view" data-view="${view}" data-fid="tab-${view}" ${s.view === view ? 'aria-current="page"' : ''}>${label}</button>`;
+  return `<span class="brand">MetaSheep</span><nav aria-label="Main">${tab('builder', 'Deck Builder')}${tab('decks', 'My Decks')}</nav><div class="account">${account}</div>`;
 }
 
 export function bannerHtml(s) {
-  if (s.user) return '';
+  if (s.user || s.view !== 'builder') return '';
   return `<p class="banner">You're not signed in. Sign in to save this deck. We'll hold your deck for 30 minutes while you sign in.</p>`;
 }
 

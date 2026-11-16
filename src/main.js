@@ -1,16 +1,21 @@
 import * as store from './store.js';
 import { setHtml } from './ui/dom.js';
 import { bannerHtml, mainPanelHtml, sidePanelHtml, topbarHtml } from './ui/deckPanel.js';
+import { decksHtml } from './ui/decksView.js';
 import { filtersHtml, gridHtml, metaHtml } from './ui/libraryView.js';
 import { modalHtml } from './ui/modals.js';
 import { toastHtml } from './ui/toast.js';
+import { total } from './rules.js';
 
 const $ = (selector) => document.querySelector(selector);
 let lastToastId = 0;
 
 function render(s) {
   setHtml($('#topbar'), topbarHtml(s));
+  $('.layout').hidden = s.view !== 'builder';
+  $('#decks-view').hidden = s.view !== 'decks';
   setHtml($('#banner'), bannerHtml(s));
+  setHtml($('#decks-view'), decksHtml(s));
   setHtml($('#filters'), filtersHtml(s));
   setHtml($('#meta'), metaHtml(s));
   setHtml($('#grid'), gridHtml(s));
@@ -42,6 +47,13 @@ const actions = {
   'sign-out': () => store.signOut(),
   'fill-demo': () => store.fillDemo(),
   'close-modal': () => store.closeModal(),
+  view: (d) => store.setView(d.view),
+  load: (d) => {
+    const s = store.getState();
+    if ((total(s.main) || total(s.side)) && !confirm('Replace the deck you are building with this saved deck?')) return;
+    store.loadDeck(Number(d.i));
+  },
+  delete: (d) => confirm('Delete this saved deck?') && store.deleteDeck(Number(d.i)),
   'dismiss-toast': (d) => store.dismissToast(Number(d.id)),
 };
 

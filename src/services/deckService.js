@@ -13,8 +13,18 @@ export function getHeld() {
 
 export const clearHeld = () => localStorage.removeItem(HELD_KEY);
 
+const readAll = () => JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+
+export const listDecks = (email) => readAll()[email] || [];
+
 export function saveDeck(email, name, deck) {
-  const all = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
-  all[email] = [...(all[email] || []), { name, main: deck.main, side: deck.side }];
+  const all = readAll();
+  all[email] = [...listDecks(email), { name, main: deck.main, side: deck.side, savedAt: Date.now() }];
+  localStorage.setItem(SAVED_KEY, JSON.stringify(all));
+}
+
+export function deleteDeck(email, index) {
+  const all = readAll();
+  all[email] = listDecks(email).filter((_, i) => i !== index);
   localStorage.setItem(SAVED_KEY, JSON.stringify(all));
 }

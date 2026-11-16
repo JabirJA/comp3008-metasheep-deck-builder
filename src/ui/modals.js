@@ -61,6 +61,9 @@ export function modalHtml(s) {
   return shell(
     '✓ Deck saved to My Decks',
     `<p><strong>${esc(m.name)}</strong> · ${m.summary}</p>
-     <div class="row-btns"><button type="button" class="btn primary" data-action="close-modal" data-autofocus data-fid="saved-done">Done</button></div>`,
+     <div class="row-btns">
+       <button type="button" class="btn outline" data-action="close-modal" data-fid="saved-done">Keep building</button>
+       <button type="button" class="btn primary" data-action="view" data-view="decks" data-autofocus data-fid="saved-view">View My Decks</button>
+     </div>`,
   );
 }

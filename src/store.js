@@ -8,6 +8,7 @@ let state = {
   side: {},
   filters: { colors: [], types: [], query: '' },
   user: null,
+  view: 'builder',
   modal: null,
   toast: null,
 };
@@ -114,7 +115,7 @@ export function submitAuth(tab, email, password) {
 }
 
 export function signOut() {
-  set({ user: null });
+  set({ user: null, view: 'builder' });
   toast('info', 'Signed out. Your current deck is still on screen.');
 }
 
@@ -127,6 +128,21 @@ export function confirmSave(name) {
   } catch {
     set({ modal: { type: 'save', name: clean, error: "Couldn't save. Your deck is still here, so try again." } });
   }
+}
+
+export const setView = (view) => set({ view, modal: null });
+
+export function loadDeck(index) {
+  const deck = decks.listDecks(state.user.email)[index];
+  set({ main: deck.main, side: deck.side, view: 'builder' });
+  toast('success', `Loaded "${deck.name}" (${summary()}).`);
+}
+
+export function deleteDeck(index) {
+  const deck = decks.listDecks(state.user.email)[index];
+  decks.deleteDeck(state.user.email, index);
+  set({});
+  toast('info', `Deleted "${deck.name}".`);
 }
 
 export const dismissToast = (id) => {
